@@ -13,7 +13,7 @@ test('grid test', () => {
     expect(testBoard.grid).not.toContainEqual(z99);
 })
 
-test('ship placement test', () => {
+test('ship placement tests', () => {
     const testBoard = new Gameboard();
     const carrier = new Ship('Carrier', 5);
     const carrierV = [
@@ -32,4 +32,6 @@ test('ship placement test', () => {
         {coord: 'E10', ship: 'Carrier', hit: false}
     ];
     expect(testBoard.placeShip(carrier, 'A10', 'horizontal')).toEqual(carrierH);
+    expect(testBoard.placeShip(carrier, 'A2', 'vertical')).toBeFalsy();
+    expect(testBoard.placeShip(carrier, 'I10', 'horizontal')).toBeFalsy();
 })
