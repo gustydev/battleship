@@ -14,7 +14,19 @@ class Gameboard {
         }
     }
     placeShip(ship, coord, direction) {
-        
+        let xAxis = coord.slice(0, 1);
+        let yAxis = Number(coord.slice(1));
+        for (let i = 0; i < ship.size; i++) {
+            if (yAxis < 1 || xAxis.charCodeAt(0) > 74) { // Out of bounds cases
+                return false;
+            }
+            ship.positions.push(`${xAxis + yAxis}`);
+            if (direction === 'vertical') {
+                yAxis -= 1;
+            } else {
+                xAxis = String.fromCharCode(a.charCodeAt(0) + 1);
+            }
+        }
     }
 }
 
