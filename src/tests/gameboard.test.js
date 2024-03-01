@@ -1,4 +1,5 @@
 const Gameboard = require('../gameboard');
+const Ship = require('../ship');
 
 test('grid test', () => {
     const testBoard = new Gameboard();
@@ -12,3 +13,23 @@ test('grid test', () => {
     expect(testBoard.grid).not.toContainEqual(z99);
 })
 
+test('ship placement test', () => {
+    const testBoard = new Gameboard();
+    const carrier = new Ship('Carrier', 5);
+    const carrierV = [
+        {coord: 'A10', ship: 'Carrier', hit: false}, 
+        {coord: 'A9', ship: 'Carrier', hit: false},
+        {coord: 'A8', ship: 'Carrier', hit: false},
+        {coord: 'A7', ship: 'Carrier', hit: false},
+        {coord: 'A6', ship: 'Carrier', hit: false}
+    ];
+    expect(testBoard.placeShip(carrier, 'A10', 'vertical')).toEqual(carrierV);
+    const carrierH = [
+        {coord: 'A10', ship: 'Carrier', hit: false}, 
+        {coord: 'B10', ship: 'Carrier', hit: false},
+        {coord: 'C10', ship: 'Carrier', hit: false},
+        {coord: 'D10', ship: 'Carrier', hit: false},
+        {coord: 'E10', ship: 'Carrier', hit: false}
+    ];
+    expect(testBoard.placeShip(carrier, 'A10', 'horizontal')).toEqual(carrierH);
+})

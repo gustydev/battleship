@@ -1,3 +1,5 @@
+const Ship = require('./ship');
+
 class Gameboard {
     constructor() {
         this.grid = [];
@@ -5,10 +7,14 @@ class Gameboard {
             for (let n = 65; n < 90; n++) {
                 this.grid.push({
                     coord: String.fromCharCode(n) + i,
-                    hit: false
+                    ship: undefined,
+                    hit: false,
                 })
             }
         }
+    }
+    placeShip(ship, coord, direction) {
+        
     }
 }
 
