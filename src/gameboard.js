@@ -27,6 +27,13 @@ class Gameboard {
                 xAxis = String.fromCharCode(a.charCodeAt(0) + 1);
             }
         }
+        const shipCoords = [];
+        ship.positions.forEach((p) => {
+            const sq = this.grid.find((square) => square.coord === p)
+            sq.ship = ship.name;
+            shipCoords.push(sq);
+        })
+        return shipCoords;
     }
 }
 
