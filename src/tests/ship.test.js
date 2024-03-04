@@ -7,6 +7,7 @@ test('ship positions', () => {
         {coord: undefined, isHit: false},
         {coord: undefined, isHit: false}
     ]
+
     expect(testShip.positions).toEqual(shipPos);
 })
 
@@ -26,6 +27,7 @@ test('testing hit function', () => {
 
 test('testing isSunk function', () => {
     const shipOne = new Ship('test', 1);
+    
     expect(shipOne.isSunk()).toBeFalsy();
     shipOne.hit(0);
     expect(shipOne.isSunk()).toBeTruthy();

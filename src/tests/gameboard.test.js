@@ -67,6 +67,7 @@ test('attack function', () => {
     expect(testBoard.ships.find(s => s.name === 'Carrier').positions[0].isHit).toBeTruthy();
     expect(testBoard.ships.find(s => s.name === 'Carrier').positions[1].isHit).toBeFalsy();
     expect(testBoard.ships.find(s => s.name === 'Battleship').positions[0].isHit).toBeFalsy();
+    
     expect(testBoard.grid.find(c => c.coord === 'A10').isHit).toBeTruthy();
     expect(testBoard.grid.find(c => c.coord === 'A9').isHit).toBeFalsy();
     expect(testBoard.grid.find(c => c.coord === 'G6').isHit).toBeFalsy();
