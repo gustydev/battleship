@@ -8,10 +8,11 @@ class Gameboard {
                 this.grid.push({
                     coord: String.fromCharCode(n) + i,
                     ship: undefined,
-                    hit: false,
+                    isHit: false,
                 })
             }
         }
+        this.ships = [];
     }
     placeShip(ship, coord, direction) {
         let xAxis = coord.slice(0, 1);
@@ -20,7 +21,7 @@ class Gameboard {
             if (yAxis < 1 || xAxis.charCodeAt(0) > 74) { // Out of bounds cases
                 return false;
             }
-            ship.positions[i] = {coord: xAxis + yAxis, hit: false};
+            ship.positions[i] = {coord: xAxis + yAxis, isHit: false};
             if (direction === 'vertical') {
                 yAxis -= 1;
             } else {
@@ -33,6 +34,7 @@ class Gameboard {
             sq.ship = ship.name;
             shipCoords.push(sq);
         })
+        this.ships.push(ship);
         return shipCoords;
     }
 }
