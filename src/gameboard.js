@@ -20,16 +20,16 @@ class Gameboard {
             if (yAxis < 1 || xAxis.charCodeAt(0) > 74) { // Out of bounds cases
                 return false;
             }
-            ship.positions.push(`${xAxis + yAxis}`);
+            ship.positions[i] = {coord: xAxis + yAxis, hit: false};
             if (direction === 'vertical') {
                 yAxis -= 1;
             } else {
-                xAxis = String.fromCharCode(a.charCodeAt(0) + 1);
+                xAxis = String.fromCharCode(xAxis.charCodeAt(0) + 1);
             }
         }
-        const shipCoords = [];
+        const shipCoords = []; // For the tests
         ship.positions.forEach((p) => {
-            const sq = this.grid.find((square) => square.coord === p)
+            const sq = this.grid.find((square) => square.coord === p.coord)
             sq.ship = ship.name;
             shipCoords.push(sq);
         })
