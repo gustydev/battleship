@@ -3,6 +3,7 @@ const Ship = require('./ship');
 class Gameboard {
     constructor() {
         this.grid = [];
+        
         for (let i = 1; i < 11; i ++) {
             for (let n = 65; n < 90; n++) {
                 this.grid.push({
@@ -12,11 +13,14 @@ class Gameboard {
                 })
             }
         }
+
         this.ships = [];
     }
+
     placeShip(ship, coord, direction) {
         let xAxis = coord.slice(0, 1);
         let yAxis = Number(coord.slice(1));
+
         for (let i = 0; i < ship.size; i++) {
             if (yAxis < 1 || xAxis.charCodeAt(0) > 74) { // Out of bounds cases
                 return false;
@@ -28,15 +32,37 @@ class Gameboard {
                 xAxis = String.fromCharCode(xAxis.charCodeAt(0) + 1);
             }
         }
+
         const shipCoords = []; // For the tests
+
         ship.positions.forEach((p) => {
             const sq = this.grid.find((square) => square.coord === p.coord)
             sq.ship = ship.name;
             shipCoords.push(sq);
         })
+
         this.ships.push(ship);
+
         return shipCoords;
     }
+
+    receiveAttack(coord) {
+        const sq = this.grid.find(s => s.coord === coord);
+
+        if (sq.isHit) {
+            return false;
+        }
+        sq.isHit = true;
+
+        const shipHit = this.ships.find(s => s.positions.some(e => e.coord === coord));
+
+        if (shipHit) {
+            shipHit.positions.find(p => p.coord === coord).isHit = true;
+        }
+
+        return true;
+    }
+
 }
 
 module.exports = Gameboard;
