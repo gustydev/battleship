@@ -5,7 +5,7 @@ class Gameboard {
         this.grid = [];
 
         for (let i = 1; i < 11; i ++) {
-            for (let n = 65; n < 90; n++) {
+            for (let n = 65; n < 75; n++) {
                 this.grid.push({
                     coord: String.fromCharCode(n) + i,
                     ship: undefined,
@@ -22,7 +22,7 @@ class Gameboard {
         let yAxis = Number(coord.slice(1));
 
         for (let i = 0; i < ship.size; i++) {
-            if (yAxis < 1 || xAxis.charCodeAt(0) > 74) { // Out of bounds cases
+            if (yAxis < 1 || xAxis.charCodeAt(0) >= 75) { // Out of bounds cases
                 return false;
             }
             ship.positions[i] = {coord: xAxis + yAxis, isHit: false};
@@ -62,7 +62,7 @@ class Gameboard {
 
         return true;
     }
-    
+
 }
 
 module.exports = Gameboard;
