@@ -53,7 +53,7 @@ test('ship placement tests', () => {
     ])
 })
 
-test('attack function', () => {
+test('receive attack function', () => {
     const testBoard = new Gameboard();
 
     const carrier = new Ship('Carrier', 5);
