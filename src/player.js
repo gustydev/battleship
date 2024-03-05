@@ -5,8 +5,15 @@ class Player {
         this.name = name;
         this.board = new Gameboard();
     }
-    attack(player, coord) {
-        
+    attack(target, coord) {
+        if (!coord) {
+            let random = target.board.grid[Math.floor(Math.random()*target.board.grid.length)];
+            while (random.isHit !== false) { // Find valid (not hit) coordinates
+                random = target.board.grid[Math.floor(Math.random()*target.board.grid.length)];
+            }
+            return target.board.receiveAttack(random.coord);
+        }
+        return target.board.receiveAttack(coord);
     }
 }
 
