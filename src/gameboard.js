@@ -55,7 +55,7 @@ class Gameboard {
         const shipHit = this.ships.find(s => s.positions.some(e => e.coord === coord));
 
         if (shipHit) {
-            shipHit.positions.find(p => p.coord === coord).isHit = true;
+            shipHit.hit(coord);
         }
 
         return true;

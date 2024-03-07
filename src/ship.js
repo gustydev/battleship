@@ -9,9 +9,10 @@ class Ship {
         }
 
     }
-    hit(pos) {
-        if (!(this.positions[pos].isHit)) {
-            this.positions[pos].isHit = true;
+    hit(coord) {
+        const posHit = this.positions.find((p) => p.coord === coord);
+        if (!(posHit).isHit) {
+            posHit.isHit = true;
             return true;
         }
 
