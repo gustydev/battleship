@@ -1,0 +1,33 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 95vh;
+}
+
+.boards-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10%;
+    justify-content: space-around;
+    align-self: center;
+    height: 80%;
+}
+
+.board {
+    display: grid;
+    grid-template-rows: repeat(10, 1fr);
+    border: 1px solid rgb(0, 0, 0);
+    width: 400px;
+    height: 400px;
+    cursor: crosshair;
+}
+
+.row {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+}
+
+.square {
+    border: 1px solid rgb(66, 66, 66);
+}
