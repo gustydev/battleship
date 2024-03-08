@@ -26,7 +26,15 @@ function craftBoards() {
             }
         })
     })
-
 }
 
-module.exports = craftBoards;
+function fillBoard(p) {
+    p.board.grid.forEach((sq) => {
+        if (sq.ship) {
+            const boardSq = document.getElementById(`p1-${sq.coord}`);
+            boardSq.style.backgroundColor = 'red';
+        }
+    })
+}
+
+module.exports = {craftBoards, fillBoard};
