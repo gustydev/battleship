@@ -1,12 +1,9 @@
 const Player = require('./player');
 const Ship = require('./ship');
+const dom = require('./dom');
+const clickAttack = dom.clickAttack;
 
 function game(human, comp) {
-    
-    while (!human.board.allSunk() && !comp.board.allSunk()) {
-        clickAttack(humanPlayer, compPlayer);
-
-    }
 
     if (human.board.allSunk()) {
         alert(`All of ${human.name}'s ships have been sunk! Computer wins!`);

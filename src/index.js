@@ -25,4 +25,4 @@ humanPlayer.board.placeShip(new Ship('Destroyer', 2), 'A10', 'horizontal')
 
 craftBoards();
 fillBoard(humanPlayer);
-clickAttack(humanPlayer, compPlayer);
+clickAttack(humanPlayer, compPlayer)

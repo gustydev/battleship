@@ -70,8 +70,11 @@ function clickAttack(player, comp) {
 
     squares.forEach((s) => {
         s.addEventListener('click', () => {
-            sendAttack(player, comp, s.id.substring(3, 6));
-            sendAttack(comp, player)
+            if (![...s.classList].includes('hit')) {
+                s.classList.add('hit');
+                sendAttack(player, comp, s.id.substring(3, 6));
+                sendAttack(comp, player)
+            }
         })
     })
 }
