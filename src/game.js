@@ -4,7 +4,8 @@ const Ship = require('./ship');
 function game(human, comp) {
     
     while (!human.board.allSunk() && !comp.board.allSunk()) {
-        // play game
+        clickAttack(humanPlayer, compPlayer);
+
     }
 
     if (human.board.allSunk()) {

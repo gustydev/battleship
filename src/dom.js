@@ -40,15 +40,21 @@ function fillBoard(p) {
 function sendAttack(player, target, coord) {
     let board;
     if (target.name === 'Computer') {
+        board = document.querySelector('div#board-2');
+    } else {
         board = document.querySelector('div#board-1');
     }
-    board = document.querySelector('div#board-2');
 
-    const sq = document.getElementById(`p${board.id.slice(-1)}-${coord}`);
+    let attack;
+    if (!coord) {
+        attack = player.attack(target);
+    }
+    attack = player.attack(target, coord);
 
-    const attack = player.attack(target, coord);
+    const sq = document.getElementById(`p${board.id.slice(-1)}-${attack}`);
+
     if (attack) {
-        if (target.board.grid.find((s) => s.coord === coord).ship) {
+        if (target.board.grid.find((s) => s.coord === attack).ship) {
             sq.style.backgroundColor = 'red';
         } else {
             sq.style.backgroundColor = 'green';
@@ -65,6 +71,7 @@ function clickAttack(player, comp) {
     squares.forEach((s) => {
         s.addEventListener('click', () => {
             sendAttack(player, comp, s.id.substring(3, 6));
+            sendAttack(comp, player)
         })
     })
 }

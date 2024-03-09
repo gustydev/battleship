@@ -11,9 +11,9 @@ class Player {
             while (random.isHit !== false) { // Find valid (not hit) coordinates
                 random = target.board.grid[Math.floor(Math.random()*target.board.grid.length)];
             }
-            return target.board.receiveAttack(random.coord);
+            return target.board.receiveAttack(random.coord), random.coord;
         }
-        return target.board.receiveAttack(coord);
+        return target.board.receiveAttack(coord), coord;
     }
 }
 
