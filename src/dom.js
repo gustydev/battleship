@@ -32,9 +32,46 @@ function fillBoard(p) {
     p.board.grid.forEach((sq) => {
         if (sq.ship) {
             const boardSq = document.getElementById(`p1-${sq.coord}`);
-            boardSq.style.backgroundColor = 'red';
+            boardSq.style.backgroundColor = 'black';
         }
     })
 }
 
-module.exports = {craftBoards, fillBoard};
+function sendAttack(player, target, coord) {
+    let board;
+    if (target.name === 'Computer') {
+        board = document.querySelector('div#board-1');
+    }
+    board = document.querySelector('div#board-2');
+
+    const sq = document.getElementById(`p${board.id.slice(-1)}-${coord}`);
+
+    const attack = player.attack(target, coord);
+    if (attack) {
+        if (target.board.grid.find((s) => s.coord === coord).ship) {
+            sq.style.backgroundColor = 'red';
+        } else {
+            sq.style.backgroundColor = 'green';
+        }
+        return true;
+    }
+    return false;
+}
+
+function clickAttack(player, comp) {
+    const compBoard = document.querySelector('div#board-2');
+    const squares = compBoard.querySelectorAll('div.square');
+
+    squares.forEach((s) => {
+        s.addEventListener('click', () => {
+            sendAttack(player, comp, s.id.substring(3, 6));
+        })
+    })
+}
+
+module.exports = {
+    craftBoards, 
+    fillBoard,
+    sendAttack,
+    clickAttack
+};
