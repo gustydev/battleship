@@ -48,8 +48,9 @@ function sendAttack(player, target, coord) {
     let attack;
     if (!coord) {
         attack = player.attack(target);
+    } else {
+        attack = player.attack(target, coord);
     }
-    attack = player.attack(target, coord);
 
     const sq = document.getElementById(`p${board.id.slice(-1)}-${attack}`);
 
