@@ -65,7 +65,7 @@ function sendAttack(player, target, coord) {
     return false;
 }
 
-function clickAttack(player, comp) {
+function clickAttack(human, comp) {
     const compBoard = document.querySelector('div#board-2');
     const squares = compBoard.querySelectorAll('div.square');
 
@@ -73,11 +73,11 @@ function clickAttack(player, comp) {
         s.addEventListener('click', () => {
             if (![...s.classList].includes('hit')) {
                 s.classList.add('hit');
-                sendAttack(player, comp, s.id.substring(3, 6));
-                sendAttack(comp, player)
+                sendAttack(human, comp, s.id.substring(3, 6));
+                sendAttack(comp, human);
             }
         })
-    })
+    })  
 }
 
 module.exports = {
