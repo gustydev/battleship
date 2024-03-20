@@ -32,23 +32,34 @@ function randomShips(player) {
         new Ship('Destroyer', 2)
     ]
 
-    const placedShips = [];
+    const takenCoords = [];
 
     const directions = ['horizontal', 'vertical'];
 
     shipList.forEach((ship) => {
-        const randomX = randomRange(65, 74); // charCode 65 to 74: A to J
-        const randomY = randomRange(1, 10);
+        let randomX = randomRange(65, 74); // charCode 65 to 74: A to J
+        let randomY = randomRange(1, 10);
+
+        while (takenCoords.includes(`${String.fromCharCode(randomX)}${randomY}`)) {
+            randomX = randomRange(65, 74);
+            randomY = randomRange(1, 10);
+        }
 
         const coord = `${String.fromCharCode(randomX)}${randomY}`;
         const dir = directions[randomRange(0, 1)];
 
-        player.board.placeShip(ship, coord, dir);
+        const place = player.board.placeShip(ship, coord, dir);
+
+        place.forEach((c) => {
+            takenCoords.push(c.coord);
+        })
+
     })
 
 }
 
 module.exports = {
     loadGame, 
-    checkWin
+    checkWin,
+    randomShips
 };
