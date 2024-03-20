@@ -3,13 +3,13 @@ const Player = require('./player');
 const game = require('./game');
 const loadGame = game.loadGame;
 const checkWin = game.checkWin;
-const randomShips = game.randomShips;
+const randomizeShips = game.randomizeShips;
 
 const comp = new Player('Computer');
 const human = new Player('Human');
 // Later allow player to set their own name
 
-randomShips(comp);
+randomizeShips(comp);
 
 human.board.placeShip(new Ship('Carrier', 5), 'A2', 'horizontal')
 human.board.placeShip(new Ship('Battleship', 4), 'A4', 'horizontal')

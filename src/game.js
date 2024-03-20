@@ -23,7 +23,7 @@ function randomRange(min, max) {
     return Math.round(Math.random() * (max - min) + min);
 }
 
-function randomShips(player) {
+function randomizeShips(player) {
     const shipList = [
         new Ship('Carrier', 5),
         new Ship('Battleship', 4),
@@ -39,16 +39,19 @@ function randomShips(player) {
     shipList.forEach((ship) => {
         let randomX = randomRange(65, 74); // charCode 65 to 74: A to J
         let randomY = randomRange(1, 10);
-
-        while (takenCoords.includes(`${String.fromCharCode(randomX)}${randomY}`)) {
-            randomX = randomRange(65, 74);
-            randomY = randomRange(1, 10);
-        }
-
-        const coord = `${String.fromCharCode(randomX)}${randomY}`;
+        let coord = `${String.fromCharCode(randomX)}${randomY}`;
         const dir = directions[randomRange(0, 1)];
 
-        const place = player.board.placeShip(ship, coord, dir);
+        let place = player.board.placeShip(ship, coord, dir);
+
+        while (takenCoords.includes(coord) || !place) {
+            randomX = randomRange(65, 74);
+            randomY = randomRange(1, 10);
+            coord = `${String.fromCharCode(randomX)}${randomY}`;
+            place = player.board.placeShip(ship, coord, dir);
+            // This duplicates ships 
+            // IT DOES AFFECT THE GAME!! FIX IT
+        }
 
         place.forEach((c) => {
             takenCoords.push(c.coord);
@@ -61,5 +64,5 @@ function randomShips(player) {
 module.exports = {
     loadGame, 
     checkWin,
-    randomShips
+    randomizeShips
 };
