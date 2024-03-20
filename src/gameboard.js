@@ -15,12 +15,19 @@ class Gameboard {
         this.ships = [];
     }
 
+    isOutOfBounds(xAxis, yAxis) {
+        if (yAxis < 1 || xAxis.charCodeAt(0) >= 75) {
+            return true;
+        }
+        return false;
+    }
+
     placeShip(ship, coord, direction) {
         let xAxis = coord.slice(0, 1);
         let yAxis = Number(coord.slice(1));
 
         for (let i = 0; i < ship.size; i++) {
-            if (yAxis < 1 || xAxis.charCodeAt(0) >= 75) { // Out of bounds cases
+            if (this.isOutOfBounds(xAxis, yAxis)) {
                 return false;
             }
             ship.positions[i] = {coord: xAxis + yAxis, isHit: false};

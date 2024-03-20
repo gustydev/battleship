@@ -104,3 +104,13 @@ test('test if all player ships sunk', () => {
     expect(testBoard.allSunk()).toBeTruthy();
 
 })
+
+test('out of bounds function tests', () => {
+    const board = new Gameboard();
+
+    expect(board.isOutOfBounds('A10')).toBeFalsy();
+    expect(board.isOutOfBounds('Z99')).toBeTruthy();
+    expect(board.isOutOfBounds('C4')).toBeFalsy();
+    expect(board.isOutOfBounds('J10')).toBeFalsy();
+
+}) 
