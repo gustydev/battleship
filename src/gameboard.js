@@ -46,7 +46,9 @@ class Gameboard {
             shipCoords.push(sq);
         })
 
-        this.ships.push(ship);
+        if (!this.ships.includes(ship)) {
+            this.ships.push(ship);
+        }
 
         return shipCoords;
     }

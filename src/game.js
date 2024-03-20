@@ -48,9 +48,8 @@ function randomizeShips(player) {
             randomX = randomRange(65, 74);
             randomY = randomRange(1, 10);
             coord = `${String.fromCharCode(randomX)}${randomY}`;
+            if (player.board.ships)
             place = player.board.placeShip(ship, coord, dir);
-            // This duplicates ships 
-            // IT DOES AFFECT THE GAME!! FIX IT
         }
 
         place.forEach((c) => {
