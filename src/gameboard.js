@@ -84,15 +84,6 @@ class Gameboard {
     allSunk() {
         return this.ships.every(s => s.isSunk());
     }
-
-    clear() {
-        this.ships = [];
-        this.grid.forEach((square) => {
-            square.ship = undefined;
-            square.isHit = false;
-        })
-        return true;
-    }
 }
 
 module.exports = Gameboard;

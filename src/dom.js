@@ -4,6 +4,8 @@ function craftBoards() {
     const boards = [boardOne, boardTwo];
 
     boards.forEach((board) => {
+        board.innerHTML = ''; // Resetting board first to avoid duplicating
+
         const playerId = board.id.match(/\d+$/);
 
         for (let i = 1; i < 11; i ++) {

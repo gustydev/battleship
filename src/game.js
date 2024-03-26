@@ -14,6 +14,7 @@ function checkWin(human, comp) {
         if (loser) {
             alert(`All of ${loser.name}'s ships sunk! ${winner.name} wins!`);
             clearInterval(checker);
+            loadGame();
         }
     }, 100, human, comp);
 }
