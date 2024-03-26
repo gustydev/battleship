@@ -5,13 +5,17 @@ const clickAttack = dom.clickAttack;
 const Ship = require('./ship');
 
 function checkWin(human, comp) {
-    const players = [human, comp];
-    const loser = players.find((p) => p.board.allSunk());
-    const winner = players.find((p) => !p.board.allSunk())
-
-    if (loser) {
-        alert(`${loser.name}'s ships all sunk! ${winner.name} wins!`)
-    }
+    const checker = setInterval(() => {
+        const players = [human, comp];
+        const loser = players.find((p) => p.board.allSunk());
+        const winner = players.find((p) => !p.board.allSunk());
+    
+        if (loser) {
+            alert(`${loser.name}'s ships all sunk! ${winner.name} wins!`);
+            clearInterval(checker);
+            // Here, call function to reset game
+        }
+    }, 100, human, comp);
 }
 
 function randomRange(min, max) {
@@ -54,6 +58,7 @@ function loadGame(human, comp) {
     placeShips(human, comp);
     fillBoard(human);
     clickAttack(human, comp);
+    checkWin(human, comp);
 }
 
 module.exports = {
