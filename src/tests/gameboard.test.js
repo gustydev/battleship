@@ -126,3 +126,18 @@ test('taken coordinates function test', () => {
     expect(testBoard.coordIsTaken('J10')).toBeFalsy();
 
 })
+
+test('clearing board', () => {
+    const testBoard = new Gameboard();
+    const smallBoy = new Ship('Small boy', 2);
+    testBoard.placeShip(smallBoy, 'A1', 'horizontal'); // Takes up A1 and B1
+
+    expect(testBoard.grid.find((sq) => sq.coord === 'A1').ship).toBeTruthy();
+    expect(testBoard.grid.find((sq) => sq.coord === 'B1').ship).toBeTruthy();
+
+    expect(testBoard.clear()).toBeTruthy();
+    
+    expect(testBoard.grid.find((sq) => sq.coord === 'A1').ship).toBeFalsy();
+    expect(testBoard.grid.find((sq) => sq.coord === 'B1').ship).toBeFalsy();
+
+})
