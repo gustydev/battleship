@@ -30,34 +30,22 @@ function randomizeShips(player) {
         new Ship('Cruiser', 3),
         new Ship('Submarine', 3),
         new Ship('Destroyer', 2)
-    ]
-
-    const takenCoords = [];
+    ];
 
     const directions = ['horizontal', 'vertical'];
 
     shipList.forEach((ship) => {
-        let randomX = randomRange(65, 74); // charCode 65 to 74: A to J
-        let randomY = randomRange(1, 10);
-        let coord = `${String.fromCharCode(randomX)}${randomY}`;
-        const dir = directions[randomRange(0, 1)];
-
-        let place = player.board.placeShip(ship, coord, dir);
-
-        while (takenCoords.includes(coord) || !place) {
-            randomX = randomRange(65, 74);
+        let randomX, randomY, coord, dir, place;
+        
+        while (!place) { // Keep trying until placement is valid
+            randomX = randomRange(65, 74); // charCode 65 to 74: A to J
             randomY = randomRange(1, 10);
             coord = `${String.fromCharCode(randomX)}${randomY}`;
-            if (player.board.ships)
+            dir = directions[randomRange(0, 1)]
+
             place = player.board.placeShip(ship, coord, dir);
         }
-
-        place.forEach((c) => {
-            takenCoords.push(c.coord);
-        })
-
     })
-
 }
 
 module.exports = {

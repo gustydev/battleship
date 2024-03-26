@@ -22,12 +22,21 @@ class Gameboard {
         return false;
     }
 
+    coordIsTaken(coord) {
+        const found = this.grid.find((sh) => sh.coord === coord);
+
+        if (found.ship) {
+            return true;
+        }
+        return false;
+    }
+
     placeShip(ship, coord, direction) {
         let xAxis = coord.slice(0, 1);
         let yAxis = Number(coord.slice(1));
 
         for (let i = 0; i < ship.size; i++) {
-            if (this.isOutOfBounds(xAxis, yAxis)) {
+            if (this.isOutOfBounds(xAxis, yAxis) || this.coordIsTaken(xAxis + yAxis)) {
                 return false;
             }
             ship.positions[i] = {coord: xAxis + yAxis, isHit: false};
@@ -48,6 +57,8 @@ class Gameboard {
 
         if (!this.ships.includes(ship)) {
             this.ships.push(ship);
+        } else {
+            return false;
         }
 
         return shipCoords;

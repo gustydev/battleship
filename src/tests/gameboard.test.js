@@ -114,3 +114,15 @@ test('out of bounds function tests', () => {
     expect(board.isOutOfBounds('J10')).toBeFalsy();
 
 }) 
+
+test('taken coordinates function test', () => {
+    const testBoard = new Gameboard();
+    const bigShip = new Ship('Big boy', 10);
+    testBoard.placeShip(bigShip, 'A1', 'horizontal'); // Takes up A1 to J1
+
+    expect(testBoard.coordIsTaken('A1')).toBeTruthy();
+    expect(testBoard.coordIsTaken('J1')).toBeTruthy();
+    expect(testBoard.coordIsTaken('A2')).toBeFalsy();
+    expect(testBoard.coordIsTaken('J10')).toBeFalsy();
+
+})
