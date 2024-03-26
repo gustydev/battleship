@@ -3,6 +3,7 @@ const craftBoards = dom.craftBoards;
 const fillBoard = dom.fillBoard;
 const clickAttack = dom.clickAttack;
 const Ship = require('./ship');
+const Player = require('./player');
 
 function checkWin(human, comp) {
     const checker = setInterval(() => {
@@ -11,9 +12,8 @@ function checkWin(human, comp) {
         const winner = players.find((p) => !p.board.allSunk());
     
         if (loser) {
-            alert(`${loser.name}'s ships all sunk! ${winner.name} wins!`);
+            alert(`All of ${loser.name}'s ships sunk! ${winner.name} wins!`);
             clearInterval(checker);
-            // Here, call function to reset game
         }
     }, 100, human, comp);
 }
@@ -53,7 +53,17 @@ function placeShips(human, comp) {
     randomizeShips(comp);
 }
 
-function loadGame(human, comp) {
+function createPlayers() {
+    const human = new Player('Human');
+    const comp = new Player('Computer');
+    return {human, comp};
+}
+
+function loadGame() {
+    const players = createPlayers();
+    const human = players.human;
+    const comp = players.comp;
+
     craftBoards();
     placeShips(human, comp);
     fillBoard(human);
