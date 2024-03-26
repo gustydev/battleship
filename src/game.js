@@ -4,12 +4,6 @@ const fillBoard = dom.fillBoard;
 const clickAttack = dom.clickAttack;
 const Ship = require('./ship');
 
-function loadGame(human, comp) {
-    craftBoards();
-    fillBoard(human);
-    clickAttack(human, comp);
-}
-
 function checkWin(human, comp) {
     if (human.board.allSunk()) {
         alert(`${human.name}'s ships all sunk! ${comp.name} wins!`);
@@ -46,6 +40,19 @@ function randomizeShips(player) {
             place = player.board.placeShip(ship, coord, dir);
         }
     })
+}
+
+function placeShips(human, comp) {
+    randomizeShips(human); 
+    // Later allow player to choose between manual/auto placement
+    randomizeShips(comp);
+}
+
+function loadGame(human, comp) {
+    craftBoards();
+    placeShips(human, comp);
+    fillBoard(human);
+    clickAttack(human, comp);
 }
 
 module.exports = {
