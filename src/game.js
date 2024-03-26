@@ -5,11 +5,12 @@ const clickAttack = dom.clickAttack;
 const Ship = require('./ship');
 
 function checkWin(human, comp) {
-    if (human.board.allSunk()) {
-        alert(`${human.name}'s ships all sunk! ${comp.name} wins!`);
-    }
-    if (comp.board.allSunk()) {
-        alert(`${comp.name}'s ships all sunk! ${human.name} wins!`)
+    const players = [human, comp];
+    const loser = players.find((p) => p.board.allSunk());
+    const winner = players.find((p) => !p.board.allSunk())
+
+    if (loser) {
+        alert(`${loser.name}'s ships all sunk! ${winner.name} wins!`)
     }
 }
 
