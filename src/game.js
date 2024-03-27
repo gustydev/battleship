@@ -2,6 +2,7 @@ const dom = require('./dom');
 const craftBoards = dom.craftBoards;
 const fillBoard = dom.fillBoard;
 const clickAttack = dom.clickAttack;
+const manualShips = dom.manualShips;
 const Ship = require('./ship');
 const Player = require('./player');
 
@@ -49,8 +50,7 @@ function randomizeShips(player) {
 }
 
 function placeShips(human, comp) {
-    randomizeShips(human); 
-    // Later allow player to choose between manual/auto placement
+    manualShips(human);
     randomizeShips(comp);
 }
 
@@ -69,7 +69,7 @@ function loadGame() {
     placeShips(human, comp);
     fillBoard(human);
     clickAttack(human, comp);
-    checkWin(human, comp);
+    // checkWin(human, comp);
 }
 
 module.exports = {

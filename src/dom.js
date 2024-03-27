@@ -1,3 +1,5 @@
+const Ship = require('./ship');
+
 function craftBoards() {
     const boardOne = document.querySelector('div#board-1');
     const boardTwo = document.querySelector('div#board-2');
@@ -82,9 +84,41 @@ function clickAttack(human, comp) {
     })  
 }
 
+function manualShips(player) {
+    const status = document.querySelector('div.status');
+    const board = document.querySelector('div#board-1');
+    const squares = board.querySelectorAll('div.square');
+
+    const shipList = [
+        new Ship('Carrier', 5),
+        new Ship('Battleship', 4),
+        new Ship('Cruiser', 3),
+        new Ship('Submarine', 3),
+        new Ship('Destroyer', 2)
+    ];
+
+    let direction = 'horizontal';
+
+    let iter = shipList[Symbol.iterator]();
+    let current = iter.next().value;
+
+    while (current) {
+        console.log(current)
+        status.textContent = `Place your ${current.name}`;
+
+        squares.forEach((square) => {
+            square.addEventListener('mouseover', () => {
+                
+            })
+        })    
+        current = iter.next().value;
+    }
+}
+
 module.exports = {
     craftBoards, 
     fillBoard,
     sendAttack,
-    clickAttack
+    clickAttack,
+    manualShips
 };
