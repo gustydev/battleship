@@ -110,7 +110,7 @@ function manualShips(player) {
             if (!current) {
                 return;
             }
-            
+
             const place = player.board.placeShip(current, `${square.id.substring(3,6)}`, dir);
             if (!place) { // Place was already taken or is invalid somehow
                 return;
@@ -127,14 +127,50 @@ function manualShips(player) {
         }
 
         function hoverToView() {
-            // Display transparent ship on board
+            if (!current) {
+                return;
+            }
+
+            let squaresToFill = [];
+            let currentSquare = square;
+
+            for (let i = 0; i < current.size; i++) {
+                if (!currentSquare) {
+                    return;
+                }
+
+                const coord = currentSquare.id.substring(3,6);
+                const xAxis = coord[0];
+                const yAxis = Number(coord.substring(1,3));
+
+                squaresToFill.push(currentSquare);
+
+                if (dir === 'horizontal') {
+                    currentSquare = currentSquare.nextSibling;
+                } else {
+                    currentSquare = document.querySelector(`div#p1-${xAxis + (yAxis - 1)}`)
+                }
+            }
+
+            if (squaresToFill.some((s) => s.style.backgroundColor === 'black')) {
+                return; // Stop execution if any square is taken
+            }
+
+            squaresToFill.forEach((s) => {
+                s.style.backgroundColor = "rgb(0, 0, 0, 0.25)";
+                s.addEventListener('mouseleave', () => {
+                    squaresToFill.forEach((sh) => {
+                        if ( !(player.board.grid.find((ship) => ship.coord === sh.id.substring(3,6)).ship) ) {
+                            sh.style.backgroundColor = '';
+                        }
+                    })
+                })
+            })
         }
 
         square.addEventListener('click', clickToPlace);
         square.addEventListener('mouseover', hoverToView);
     })
-    // Go through each ship and let the player place them
-    // Only go to the next one when it is placed
 }
 
 module.exports = {
