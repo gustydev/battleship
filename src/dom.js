@@ -87,6 +87,7 @@ function clickAttack(human, comp) {
 
 function manualShips(player) {
     const status = document.querySelector('div.status');
+    const message = document.querySelector('div.message');
     const board = document.querySelector('div#board-1');
     const squares = board.querySelectorAll('div.square');
 
@@ -122,7 +123,8 @@ function manualShips(player) {
             if (current) {
                 status.textContent = `Place your ${current.name}`
             } else {
-                status.textContent = 'All ships placed!'
+                status.textContent = '';
+                message.textContent = '';
             }
         }
 

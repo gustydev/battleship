@@ -82,7 +82,7 @@ class Gameboard {
     }
 
     allSunk() {
-        return this.ships.every(s => s.isSunk());
+        return (this.ships.length > 0 && this.ships.every(s => s.isSunk()));
     }
 }
 
