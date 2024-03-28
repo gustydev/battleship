@@ -106,25 +106,32 @@ function manualShips(player) {
     status.textContent = `Place your ${current.name}`
 
     squares.forEach((square) => {
-        square.addEventListener('mouseover', () => {
-            // Display transparent ship on board
-        })
-
-        square.addEventListener('click', () => {
-            console.log(current, Boolean(current), square.id, dir)
-            player.board.placeShip(current, `${square.id.substring(3,6)}`, dir);
+        function clickToPlace() {
+            if (!current) {
+                return;
+            }
+            
+            const place = player.board.placeShip(current, `${square.id.substring(3,6)}`, dir);
+            if (!place) { // Place was already taken or is invalid somehow
+                return;
+            }
+                
             fillBoard(player);
+    
             current = iter.next().value;
             if (current) {
                 status.textContent = `Place your ${current.name}`
+            } else {
+                status.textContent = 'All ships placed!'
             }
-            if (!current) {
-                return;
-                // End execution
-            }
-            // Place ship on board and advance to next ship
-            // Do this until ships are done
-        })
+        }
+
+        function hoverToView() {
+            // Display transparent ship on board
+        }
+
+        square.addEventListener('click', clickToPlace);
+        square.addEventListener('mouseover', hoverToView);
     })
     // Go through each ship and let the player place them
     // Only go to the next one when it is placed
