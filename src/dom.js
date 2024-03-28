@@ -1,4 +1,5 @@
 const Ship = require('./ship');
+const Player = require('./player');
 
 function craftBoards() {
     const boardOne = document.querySelector('div#board-1');
@@ -97,22 +98,36 @@ function manualShips(player) {
         new Ship('Destroyer', 2)
     ];
 
-    let direction = 'horizontal';
+    let dir = 'horizontal';
 
-    let iter = shipList[Symbol.iterator]();
+    const iter = shipList[Symbol.iterator]();
     let current = iter.next().value;
 
-    while (current) {
-        console.log(current)
-        status.textContent = `Place your ${current.name}`;
+    status.textContent = `Place your ${current.name}`
 
-        squares.forEach((square) => {
-            square.addEventListener('mouseover', () => {
-                
-            })
-        })    
-        current = iter.next().value;
-    }
+    squares.forEach((square) => {
+        square.addEventListener('mouseover', () => {
+            // Display transparent ship on board
+        })
+
+        square.addEventListener('click', () => {
+            console.log(current, Boolean(current), square.id, dir)
+            player.board.placeShip(current, `${square.id.substring(3,6)}`, dir);
+            fillBoard(player);
+            current = iter.next().value;
+            if (current) {
+                status.textContent = `Place your ${current.name}`
+            }
+            if (!current) {
+                return;
+                // End execution
+            }
+            // Place ship on board and advance to next ship
+            // Do this until ships are done
+        })
+    })
+    // Go through each ship and let the player place them
+    // Only go to the next one when it is placed
 }
 
 module.exports = {
