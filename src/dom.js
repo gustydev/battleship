@@ -126,9 +126,16 @@ function manualShips(player) {
             }
         }
 
+        let unusedSquares; // Squares from previous direction's preview
         function hoverToView() {
-            if (!current) {
+            if (!current || square.style.backgroundColor === 'black') {
                 return;
+            }
+
+            if (unusedSquares) {
+                unusedSquares.forEach((sq) => {
+                    sq.style.backgroundColor = '';
+                })
             }
 
             let squaresToFill = [];
@@ -165,6 +172,7 @@ function manualShips(player) {
                     })
                 })
             })
+            unusedSquares = squaresToFill;
         }
 
         square.addEventListener('click', clickToPlace);
