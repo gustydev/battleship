@@ -155,7 +155,6 @@ function manualShips(player) {
             if (squaresToFill.some((s) => s.style.backgroundColor === 'black')) {
                 return; // Stop execution if any square is taken
             }
-
             squaresToFill.forEach((s) => {
                 s.style.backgroundColor = "rgb(0, 0, 0, 0.25)";
                 s.addEventListener('mouseleave', () => {
@@ -170,6 +169,16 @@ function manualShips(player) {
 
         square.addEventListener('click', clickToPlace);
         square.addEventListener('mouseover', hoverToView);
+        
+        square.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+            if (dir === 'horizontal') {
+                dir = 'vertical';
+            } else {
+                dir = 'horizontal';
+            }
+            hoverToView();
+        })
     })
 }
 

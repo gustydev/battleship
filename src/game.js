@@ -70,6 +70,7 @@ function loadGame() {
     fillBoard(human);
     clickAttack(human, comp);
     // checkWin(human, comp);
+    // Note: currently broken (find a way to block it if no ships are placed at all)
 }
 
 module.exports = {
