@@ -134,7 +134,9 @@ function manualShips(player) {
 
             if (unusedSquares) {
                 unusedSquares.forEach((sq) => {
-                    sq.style.backgroundColor = '';
+                    if (sq.style.backgroundColor !== 'black') {
+                        sq.style.backgroundColor = '';
+                    }
                 })
             }
 
@@ -162,14 +164,16 @@ function manualShips(player) {
             if (squaresToFill.some((s) => s.style.backgroundColor === 'black')) {
                 return; // Stop execution if any square is taken
             }
+
             squaresToFill.forEach((s) => {
                 s.style.backgroundColor = "rgb(0, 0, 0, 0.25)";
-                s.addEventListener('mouseleave', () => {
-                    squaresToFill.forEach((sh) => {
-                        if ( !(player.board.grid.find((ship) => ship.coord === sh.id.substring(3,6)).ship) ) {
-                            sh.style.backgroundColor = '';
-                        }
-                    })
+            })
+            
+            square.addEventListener('mouseleave', () => {
+                squaresToFill.forEach((sh) => {
+                    if ( !(player.board.grid.find((ship) => ship.coord === sh.id.substring(3,6)).ship) ) {
+                        sh.style.backgroundColor = '';
+                    }
                 })
             })
             unusedSquares = squaresToFill;
