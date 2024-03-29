@@ -1,5 +1,6 @@
 const Ship = require('./ship');
 const Player = require('./player');
+const { allPlaced, gameLoop } = require('./game');
 
 function craftBoards() {
     const boardOne = document.querySelector('div#board-1');
@@ -60,11 +61,24 @@ function sendAttack(player, target, coord) {
     const sq = document.getElementById(`p${board.id.slice(-1)}-${attack}`);
 
     if (attack) {
+        let hit;
         if (target.board.grid.find((s) => s.coord === attack).ship) {
             sq.style.backgroundColor = 'red';
+            hit = 'hits';
         } else {
             sq.style.backgroundColor = 'green';
+            hit = 'misses';
         }
+
+        const msg1 = document.querySelector('div#msg1');
+        const msg2 = document.querySelector('div#msg2');
+
+        if (player.name === 'Computer') {
+            msg2.textContent = `${player.name} attacks ${target.name} at ${attack}, and ${hit}!`
+        } else {
+            msg1.textContent = `${player.name} attacks ${target.name} at ${attack}, and ${hit}!`
+        }
+
         return true;
     }
     return false;
@@ -86,8 +100,8 @@ function clickAttack(human, comp) {
 }
 
 function manualShips(player) {
-    const status = document.querySelector('div.status');
-    const message = document.querySelector('div.message');
+    const msg1 = document.querySelector('div#msg1');
+    const msg2 = document.querySelector('div#msg2');
     const board = document.querySelector('div#board-1');
     const squares = board.querySelectorAll('div.square');
 
@@ -104,7 +118,8 @@ function manualShips(player) {
     const iter = shipList[Symbol.iterator]();
     let current = iter.next().value;
 
-    status.textContent = `Place your ${current.name}`
+    msg1.textContent = `Welcome to Battleship! Place your ${current.name}`
+    msg2.textContent = 'Tip: right click to rotate your ship!';
 
     squares.forEach((square) => {
         function clickToPlace() {
@@ -121,10 +136,10 @@ function manualShips(player) {
     
             current = iter.next().value;
             if (current) {
-                status.textContent = `Place your ${current.name}`
+                msg1.textContent = `Place your ${current.name}`
             } else {
-                status.textContent = '';
-                message.textContent = '';
+                msg1.textContent = 'All ships placed!';
+                msg2.textContent = 'Click on the enemy board to begin the game.';
             }
         }
 
