@@ -1,6 +1,4 @@
 const Ship = require('./ship');
-const Player = require('./player');
-const { allPlaced, gameLoop } = require('./game');
 
 function craftBoards() {
     const boardOne = document.querySelector('div#board-1');
@@ -217,10 +215,39 @@ function manualShips(player) {
     })
 }
 
+function gameOver() {
+    const boards = document.querySelectorAll('div.board');
+    boards.forEach((board) => {
+        board.style.pointerEvents = 'none';
+    })
+
+    const info = document.querySelector('div.info');
+
+    const msg3 = document.createElement('div');
+    msg3.id = 'msg3';
+    msg3.textContent = 'Game over! Click below to start a new game'
+    info.appendChild(msg3);
+
+    const reset = document.createElement('button');
+    reset.id = 'reset';
+    reset.textContent = 'Play again'
+
+    reset.addEventListener('click', () => {
+        info.removeChild(msg3);
+        info.removeChild(reset);
+        boards.forEach((board) => {
+            board.style.pointerEvents = '';
+        })
+    })
+
+    info.appendChild(reset)
+}
+
 module.exports = {
     craftBoards, 
     fillBoard,
     sendAttack,
     clickAttack,
-    manualShips
+    manualShips,
+    gameOver
 };

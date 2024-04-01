@@ -2,6 +2,7 @@ const dom = require('./dom');
 const craftBoards = dom.craftBoards;
 const clickAttack = dom.clickAttack;
 const manualShips = dom.manualShips;
+const gameOver = dom.gameOver;
 const Ship = require('./ship');
 const Player = require('./player');
 
@@ -14,7 +15,14 @@ function checkWin(human, comp) {
         if (loser) {
             alert(`All of ${loser.name}'s ships sunk! ${winner.name} wins!`);
             clearInterval(checker);
-            loadGame();
+
+            gameOver();
+
+            const reset = document.querySelector('button#reset');
+            reset.addEventListener('click', () => {
+                loadGame();
+            })
+
         }
     }, 100, human, comp);
 }
