@@ -4,7 +4,8 @@
   "description": "Battleship game",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "AutoUpdate": "git subtree push --prefix dist origin gh-pages"
   },
   "author": "",
   "license": "ISC",
