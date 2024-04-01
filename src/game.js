@@ -1,6 +1,5 @@
 const dom = require('./dom');
 const craftBoards = dom.craftBoards;
-const fillBoard = dom.fillBoard;
 const clickAttack = dom.clickAttack;
 const manualShips = dom.manualShips;
 const Ship = require('./ship');
@@ -49,11 +48,6 @@ function randomizeShips(player) {
     })
 }
 
-function placeShips(human, comp) {
-    manualShips(human);
-    randomizeShips(comp);
-}
-
 function createPlayers() {
     const human = new Player('Human');
     const comp = new Player('Computer');
@@ -66,8 +60,8 @@ function loadGame() {
     const comp = players.comp;
 
     craftBoards();
-    placeShips(human, comp);
-    fillBoard(human);
+    randomizeShips(comp);
+    manualShips(human)
     clickAttack(human, comp);
     checkWin(human, comp);
 }

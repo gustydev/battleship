@@ -105,6 +105,10 @@ function manualShips(player) {
     const board = document.querySelector('div#board-1');
     const squares = board.querySelectorAll('div.square');
 
+    const enemyBoard = document.querySelector('div#board-2');
+    enemyBoard.style.pointerEvents = 'none';
+    // This prevents making plays before all ships are placed!
+
     const shipList = [
         new Ship('Carrier', 5),
         new Ship('Battleship', 4),
@@ -140,6 +144,8 @@ function manualShips(player) {
             } else {
                 msg1.textContent = 'All ships placed!';
                 msg2.textContent = 'Click on the enemy board to begin the game.';
+                enemyBoard.style.pointerEvents = '';
+                // After all ships placed, allow player to attack
             }
         }
 
